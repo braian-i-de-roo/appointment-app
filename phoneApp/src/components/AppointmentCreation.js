@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import {Button, StyleSheet, TextInput, View} from 'react-native';
 import {useUserData} from '../providers/userDataProvider/UserDataContext';
+import DateInput from './DateInput';
 
 const AppointmentCreation = props => {
   const {requestAppointment} = useUserData();
@@ -17,7 +18,7 @@ const AppointmentCreation = props => {
   return (
     <View>
       <TextInput placeholder={'Doctor name'} onChangeText={setDoctorName} />
-      <TextInput placeholder={'Time'} onChangeText={setTime} />
+      <DateInput onChange={setTime} />
       <View style={styles.horizontalView}>
         <Button title={'Request'} onPress={request} />
         <Button title={'Cancel'} onPress={onCancel} />
