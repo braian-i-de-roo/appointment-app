@@ -1,8 +1,9 @@
 import React from 'react';
 
-import {Button, TextInput, View} from 'react-native';
+import {Button, View} from 'react-native';
 import {useUserData} from '../providers/userDataProvider/UserDataContext';
 import {useNavigation} from '@react-navigation/native';
+import TextInput from '../components/TextInput';
 
 const LoginView = () => {
   const {setUserName} = useUserData();
@@ -14,7 +15,7 @@ const LoginView = () => {
 
   return (
     <View>
-      <TextInput placeholder={'username'} onChangeText={setUserName} />
+      <TextInput placeholder={'username'} onChange={setUserName} />
       <Button title={'LOGIN'} onPress={() => login()} />
     </View>
   );
