@@ -5,7 +5,13 @@
  * @format
  */
 
-module.exports = {
+const metroConfig = require('@ui-kitten/metro-config');
+
+const evaConfig = {
+  evaPackage: '@eva-design/eva',
+};
+
+module.exports = metroConfig.create(evaConfig, {
   transformer: {
     getTransformOptions: async () => ({
       transform: {
@@ -14,4 +20,4 @@ module.exports = {
       },
     }),
   },
-};
+});

@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 
-import {Button, View, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useUserData} from '../providers/userDataProvider/UserDataContext';
 import AppointmentCard from '../components/AppointmentCard';
 import AppointmentCreation from '../components/AppointmentCreation';
+import {Button, Layout} from '@ui-kitten/components';
 
 const AppointmentsView = ({route, navigation}) => {
   const {getAppointments} = useUserData();
@@ -44,7 +45,7 @@ const AppointmentsView = ({route, navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Layout style={styles.container}>
       {showCreationMenu ? (
         <AppointmentCreation
           onSuccessfulRequest={onSuccessfulRequest}
@@ -52,19 +53,19 @@ const AppointmentsView = ({route, navigation}) => {
           onFailedRequest={onFailedRequest}
         />
       ) : (
-        <Button
-          title={'new appointment'}
-          onPress={() => setShowCreationMenu(true)}
-        />
+        <Button title={''} onPress={() => setShowCreationMenu(true)}>
+          NEW APPOINTMENT
+        </Button>
       )}
       {renderAppointments()}
-    </View>
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    margin: 5,
+    padding: 5,
+    height: '100%',
   },
 });
 

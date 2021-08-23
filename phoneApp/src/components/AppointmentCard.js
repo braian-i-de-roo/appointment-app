@@ -1,31 +1,29 @@
 import React from 'react';
 
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {Card, Divider, Text} from '@ui-kitten/components';
 
 const AppointmentCard = props => {
   const doctorName = props.doctorName || 'Who knows';
   const appointmentTime = props.time || 'Who knows';
   return (
-    <View style={styles.card}>
+    <Card style={styles.card}>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Doctor</Text>
-        <Text>: {doctorName}</Text>
+        <Text category="h5">Doctor:</Text>
+        <Text category="h5"> {doctorName}</Text>
       </View>
+      <Divider />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Time</Text>
-        <Text>: {appointmentTime}</Text>
+        <Text category="h6">Time</Text>
+        <Text category="h6">: {appointmentTime}</Text>
       </View>
-    </View>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#8fa4b0',
-    borderRadius: 6,
-    marginBottom: 4,
-    elevation: 5,
-    padding: 5,
+    marginTop: 5,
   },
   title: {
     fontWeight: '700',

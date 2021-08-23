@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Button, View} from 'react-native';
 import {useUserData} from '../providers/userDataProvider/UserDataContext';
 import {useNavigation} from '@react-navigation/native';
-import TextInput from '../components/TextInput';
+import {Button, Divider, Input, Layout} from '@ui-kitten/components';
+import {StyleSheet} from 'react-native';
 
 const LoginView = () => {
   const {setUserName} = useUserData();
@@ -14,11 +14,24 @@ const LoginView = () => {
   };
 
   return (
-    <View>
-      <TextInput placeholder={'username'} onChange={setUserName} />
-      <Button title={'LOGIN'} onPress={() => login()} />
-    </View>
+    <Layout style={styles.layout}>
+      <Input
+        placeholder="username"
+        onChangeText={setUserName}
+        status="primary"
+      />
+      <Divider />
+      <Button onPress={() => login()}>LOGIN</Button>
+    </Layout>
   );
 };
+
+const styles = StyleSheet.create({
+  layout: {
+    height: '100%',
+    paddingHorizontal: 6,
+    justifyContent: 'center',
+  },
+});
 
 export default LoginView;
