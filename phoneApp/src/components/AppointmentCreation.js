@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {StyleSheet, View} from 'react-native';
 import {useUserData} from '../providers/userDataProvider/UserDataContext';
 import {Button, Datepicker, Input, Layout, Text} from '@ui-kitten/components';
 import TimeSelect from './TimeSelect';
+import DoctorSelect from './DoctorSelect';
 
 const AppointmentCreation = props => {
   const {requestAppointment} = useUserData();
@@ -15,12 +16,14 @@ const AppointmentCreation = props => {
   const [time, setTime] = useState('');
 
   const request = () => {
-    requestAppointment(doctorName, time, onSuccess, onFailure);
+    const newDate = new Date(date);
+    newDate.setHours(time.time, 0, 0, 0);
+    requestAppointment(doctorName, newDate, onSuccess, onFailure);
   };
   return (
     <View>
       <Text category="h5">Doctor</Text>
-      <Input placeholder="Braian" onChangeText={setDoctorName} />
+      <DoctorSelect onSelect={setDoctorName} />
       <Text category="h5">Date</Text>
       <Datepicker
         date={date ? date : new Date()}
@@ -28,7 +31,7 @@ const AppointmentCreation = props => {
         min={new Date()}
       />
       <Text category="h5">Time</Text>
-      <TimeSelect />
+      <TimeSelect doctor={doctorName} onSelect={setTime} />
       {/*<DateInput onChange={setTime} />*/}
       <Layout style={styles.horizontalView}>
         <Button style={styles.button} onPress={request}>
