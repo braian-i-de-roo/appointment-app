@@ -34,6 +34,10 @@ object Main extends App :
         .map(_.toJson)
         .map(x => Response.jsonString(x))
 
+    case Method.GET -> Root / "doctors" / name / "times" =>
+      DoctorService.getAvailableTimes(name)
+        .map(_.toJson)
+        .map(x => Response.jsonString(x))
   }
 
   override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] =
