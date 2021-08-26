@@ -42,6 +42,7 @@ const AppointmentsView = ({route, navigation}) => {
 
   const onFailedRequest = () => {
     // TODO
+    console.log('hmmm');
   };
 
   return (

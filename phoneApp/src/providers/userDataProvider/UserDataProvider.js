@@ -25,7 +25,6 @@ const UserDataProvider = props => {
         doctorName,
         desiredTime: time,
       };
-      console.log(data);
       fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
