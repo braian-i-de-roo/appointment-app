@@ -10,7 +10,7 @@ case class Doctor(name: String)
 object Doctor:
   implicit val encoder: JsonEncoder[Doctor] = DeriveJsonEncoder.gen[Doctor]
 
-case class TimeSlot(time: Instant, prettyName: String)
+case class TimeSlot(hour: Int, minute: Int, prettyName: String)
 
 object TimeSlot:
   implicit val encoder: JsonEncoder[TimeSlot] = DeriveJsonEncoder.gen[TimeSlot]
@@ -34,8 +34,20 @@ case class LiveDoctorService(m: Ref[Map[String, Doctor]], t: Ref[Map[String, Lis
     t.get.map(_.get(doctor)).some.orElse(ZIO.succeed(List()))
 
 object LiveDoctorService:
+  private val doctors: Map[String, Doctor] = Map(
+    "Pepe" -> Doctor("Pepe"),
+    "Juan" -> Doctor("Juan"),
+    "Roberto" -> Doctor("Roberto"),
+    "Jose" -> Doctor("Jose"),
+  )
+  private val times: Map[String, List[TimeSlot]] = Map(
+    "Pepe" -> List(TimeSlot(9, 0, "9 AM"), TimeSlot(10, 0, "10 AM"), TimeSlot(15, 0, "3 PM")),
+    "Juan" -> List(TimeSlot(10, 0, "10 AM"), TimeSlot(11, 0, "11 AM")),
+    "Roberto" -> List(TimeSlot(16, 0, "4 PM"), TimeSlot(17, 0, "5 PM"), TimeSlot(18, 0, "6 PM")),
+    "Jose" -> List(TimeSlot(1, 0, "1 AM"), TimeSlot(2, 0, "2 AM")),
+  )
   def make: ULayer[Has[DoctorService]] =
     (for {
-      r <- Ref.make(Map.empty[String, Doctor])
-      t <- Ref.make(Map.empty[String, List[TimeSlot]])
+      r <- Ref.make(doctors)
+      t <- Ref.make(times)
     } yield LiveDoctorService(r, t)).toLayer
