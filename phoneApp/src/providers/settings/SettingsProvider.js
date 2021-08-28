@@ -20,10 +20,26 @@ const SettingsProvider = props => {
     }
   };
 
+  const filterSettings = filter => {
+    const fi = filter.toLowerCase();
+    let res = [];
+    for (const settingName in settings) {
+      const setting = settings[settingName];
+      if (
+        setting.name.toLowerCase().includes(fi) ||
+        setting.description.toLowerCase().includes(fi)
+      ) {
+        res.push(setting);
+      }
+    }
+    return res;
+  };
+
   const value = {
     settings,
     addSetting,
     getSettingValue,
+    filterSettings,
   };
 
   return (
