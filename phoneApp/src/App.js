@@ -17,8 +17,7 @@ import ThemesProvider from './providers/themes/ThemesProvider';
 import DoctorDataProvider from './providers/doctorData/DoctorDataProvider';
 import SettingsProvider from './providers/settings/SettingsProvider';
 import SettingsView from './views/SettingsView';
-
-const Stack = createStackNavigator();
+import RoutesProvider from './providers/routes/RoutesProvider';
 
 const App = () => {
   return (
@@ -26,7 +25,17 @@ const App = () => {
       <UserDataProvider>
         <DoctorDataProvider>
           <ThemesProvider>
-            <NavigationContainer>
+            <RoutesProvider />
+          </ThemesProvider>
+        </DoctorDataProvider>
+      </UserDataProvider>
+    </SettingsProvider>
+  );
+};
+export default App;
+
+/*
+<NavigationContainer>
               <Stack.Navigator>
                 <Stack.Screen
                   name={'Login'}
@@ -45,10 +54,4 @@ const App = () => {
                 />
               </Stack.Navigator>
             </NavigationContainer>
-          </ThemesProvider>
-        </DoctorDataProvider>
-      </UserDataProvider>
-    </SettingsProvider>
-  );
-};
-export default App;
+ */

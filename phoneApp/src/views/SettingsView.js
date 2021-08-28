@@ -4,9 +4,12 @@ import {Layout} from '@ui-kitten/components';
 import {useSettings} from '../providers/settings/SettingsContext';
 import {StyleSheet} from 'react-native';
 import SelectInput from '../components/settingInputs/SelectInput';
+import BaseHeader from '../components/navigation/BaseHeader';
+import {useNavigation} from '@react-navigation/native';
 
 const SettingsView = () => {
   const {settings} = useSettings();
+  const navigation = useNavigation();
 
   const drawSettings = () => {
     for (const settingName in settings) {
@@ -28,7 +31,16 @@ const SettingsView = () => {
     }
   };
 
-  return <Layout style={styles.container}>{drawSettings()}</Layout>;
+  return (
+    <Layout style={styles.container}>
+      <BaseHeader
+        onBack={() => navigation.goBack()}
+        title="Settings"
+        hideSettings
+      />
+      {drawSettings()}
+    </Layout>
+  );
 };
 
 const styles = StyleSheet.create({

@@ -1,24 +1,23 @@
 import React from 'react';
 
 import {useUserData} from '../providers/userDataProvider/UserDataContext';
-import {useNavigation} from '@react-navigation/native';
 import {Button, Divider, Input, Layout, Text} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
+import {useRoutes} from '../providers/routes/RoutesContext';
+import BaseHeader from '../components/navigation/BaseHeader';
 
 const LoginView = () => {
   const {setUserName} = useUserData();
-  const navigation = useNavigation();
+  const {setActiveFlow} = useRoutes();
 
   const login = () => {
-    navigation.navigate('Appointments');
+    setActiveFlow('app');
   };
 
   return (
     <Layout>
+      <BaseHeader />
       <Layout style={styles.layout}>
-        <Button onPress={() => navigation.navigate('Settings')}>
-          SETTINGS
-        </Button>
         <Text category="h5">Login</Text>
         <Input
           placeholder="username"

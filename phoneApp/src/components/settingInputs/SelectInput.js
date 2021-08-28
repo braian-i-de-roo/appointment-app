@@ -10,11 +10,7 @@ const SelectInput = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const displayValue = selectedIndex
     ? props.possibleValues[selectedIndex.row]
-    : props.value
-    ? props.value
-    : props.default
-    ? props.default
-    : undefined;
+    : props.value || props.default;
 
   const onSelect = index => {
     setModalVisible(false);
