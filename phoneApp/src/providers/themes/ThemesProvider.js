@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 
 import ThemeContext from './ThemesContext';
-import {ApplicationProvider} from '@ui-kitten/components';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import {default as defaultTheme} from './custom-theme.json';
 import {useSettings} from '../settings/SettingsContext';
+import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
 const ThemesProvider = props => {
   const {addSetting} = useSettings();
@@ -17,6 +18,7 @@ const ThemesProvider = props => {
       Theme: {
         name: 'Theme',
         type: 'select',
+        description: 'Theme of the app',
         default: defaultPreferredTheme,
         possibleValues: ['light', 'dark'],
         setter: setPreferredTheme,
@@ -27,6 +29,7 @@ const ThemesProvider = props => {
 
   return (
     <ThemeContext.Provider value={{}}>
+      <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider
         {...eva}
         theme={{...eva[preferredTheme], ...defaultTheme}}>
