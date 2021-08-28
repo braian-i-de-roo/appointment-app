@@ -2,7 +2,7 @@ import React from 'react';
 
 import {useUserData} from '../providers/userDataProvider/UserDataContext';
 import {useNavigation} from '@react-navigation/native';
-import {Button, Divider, Input, Layout} from '@ui-kitten/components';
+import {Button, Divider, Input, Layout, Text} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
 
 const LoginView = () => {
@@ -14,14 +14,20 @@ const LoginView = () => {
   };
 
   return (
-    <Layout style={styles.layout}>
-      <Input
-        placeholder="username"
-        onChangeText={setUserName}
-        status="primary"
-      />
-      <Divider />
-      <Button onPress={() => login()}>LOGIN</Button>
+    <Layout>
+      <Layout style={styles.layout}>
+        <Button onPress={() => navigation.navigate('Settings')}>
+          SETTINGS
+        </Button>
+        <Text category="h5">Login</Text>
+        <Input
+          placeholder="username"
+          onChangeText={setUserName}
+          status="primary"
+        />
+        <Divider />
+        <Button onPress={() => login()}>LOGIN</Button>
+      </Layout>
     </Layout>
   );
 };
