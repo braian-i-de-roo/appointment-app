@@ -12,11 +12,12 @@ const SettingsView = () => {
   const navigation = useNavigation();
   const [settingsList, setSettingsList] = useState(settings);
 
-  useEffect(() => {}, [settings]);
+  useEffect(() => {
+    setSettingsList(settings);
+  }, [settings]);
 
   const drawSettings = () => {
-    console.log(settingsList);
-    for (const settingName in settingsList) {
+    return Object.keys(settingsList).map(settingName => {
       const setting = settingsList[settingName];
       switch (setting.type) {
         case 'select':
@@ -32,7 +33,7 @@ const SettingsView = () => {
         case 'multiSelect':
           break;
       }
-    }
+    });
   };
 
   const updateSettingsList = text => {

@@ -5,10 +5,10 @@ const SettingsProvider = props => {
   const [settings, setSettings] = useState({});
 
   const addSetting = setting => {
-    setSettings({
-      ...settings,
+    setSettings(prevSettings => ({
+      ...prevSettings,
       ...setting,
-    });
+    }));
   };
 
   const getSettingValue = settingName => {
