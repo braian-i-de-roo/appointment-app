@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@eo-locale/react-native": "^1.4.15",
     "@eva-design/eva": "^2.1.1",
     "@react-native-community/datetimepicker": "^3.5.2",
     "@react-navigation/native": "^6.0.2",

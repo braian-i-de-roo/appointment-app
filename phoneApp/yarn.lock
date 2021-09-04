@@ -753,6 +753,18 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
+"@eo-locale/core@^1.4.15":
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/@eo-locale/core/-/core-1.4.15.tgz#366e556f9c11398034338740478bdc38a20d050c"
+  integrity sha512-nuPhNsb/ARQ51mmNp9iou6TI0Df9GxyzK/+kJSUV8BsjjuvSs328BWOHGgpLEKNhRxs9w0vEXA7VJw1SRAGGSw==
+
+"@eo-locale/react-native@^1.4.15":
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/@eo-locale/react-native/-/react-native-1.4.15.tgz#b116a5d3ed4b240f43dbc32a05ae6b659c6c1dfe"
+  integrity sha512-v+OCTj512guXI9X60bzzmkF17ab+RrgkKZQJCvmYA68ycD7DLhj+77D6tfhqA6WEGH7SANRCvESjmj8pwUt3iQ==
+  dependencies:
+    "@eo-locale/core" "^1.4.15"
+
 "@eslint/eslintrc@^0.2.1":
   version "0.2.2"
   resolved "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-0.2.2.tgz"

@@ -5,10 +5,12 @@ import {Button, Divider, Input, Layout, Text} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
 import {useRoutes} from '../providers/routes/RoutesContext';
 import BaseHeader from '../components/navigation/BaseHeader';
+import {useLocalization} from '../providers/localization/LocalizationContext';
 
 const LoginView = () => {
   const {setUserName} = useUserData();
   const {setActiveFlow} = useRoutes();
+  const {trl} = useLocalization();
 
   const login = () => {
     setActiveFlow('app');
@@ -25,7 +27,8 @@ const LoginView = () => {
           status="primary"
         />
         <Divider />
-        <Button onPress={() => login()}>LOGIN</Button>
+        <Text>{trl('ingresar')}</Text>
+        <Button onPress={() => login()}>{trl('ingresar')}</Button>
       </Layout>
     </Layout>
   );

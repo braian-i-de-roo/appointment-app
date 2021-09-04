@@ -6,8 +6,10 @@ import {StyleSheet} from 'react-native';
 import SelectInput from '../components/settingInputs/SelectInput';
 import BaseHeader from '../components/navigation/BaseHeader';
 import {useNavigation} from '@react-navigation/native';
+import {useLocalization} from '../providers/localization/LocalizationContext';
 
 const SettingsView = () => {
+  const {trl} = useLocalization();
   const {settings, filterSettings} = useSettings();
   const navigation = useNavigation();
   const [settingsList, setSettingsList] = useState(settings);
@@ -49,7 +51,7 @@ const SettingsView = () => {
     <Layout style={styles.container}>
       <BaseHeader
         onBack={() => navigation.goBack()}
-        title="Settings"
+        title={trl('configuraciones')}
         hideSettings
       />
       <Input

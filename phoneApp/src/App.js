@@ -9,15 +9,11 @@
 import React from 'react';
 
 import UserDataProvider from './providers/userDataProvider/UserDataProvider';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import LoginView from './views/LoginView';
-import AppointmentsView from './views/AppointmentsView';
 import ThemesProvider from './providers/themes/ThemesProvider';
 import DoctorDataProvider from './providers/doctorData/DoctorDataProvider';
 import SettingsProvider from './providers/settings/SettingsProvider';
-import SettingsView from './views/SettingsView';
 import RoutesProvider from './providers/routes/RoutesProvider';
+import LocalizationProvider from './providers/localization/LocalizationProvider';
 
 const App = () => {
   return (
@@ -25,7 +21,9 @@ const App = () => {
       <UserDataProvider>
         <DoctorDataProvider>
           <ThemesProvider>
-            <RoutesProvider />
+            <LocalizationProvider>
+              <RoutesProvider />
+            </LocalizationProvider>
           </ThemesProvider>
         </DoctorDataProvider>
       </UserDataProvider>
@@ -33,25 +31,3 @@ const App = () => {
   );
 };
 export default App;
-
-/*
-<NavigationContainer>
-              <Stack.Navigator>
-                <Stack.Screen
-                  name={'Login'}
-                  component={LoginView}
-                  options={{headerShown: false}}
-                />
-                <Stack.Screen
-                  name={'Appointments'}
-                  component={AppointmentsView}
-                  options={{headerShown: false}}
-                />
-                <Stack.Screen
-                  name={'Settings'}
-                  component={SettingsView}
-                  options={{headerShown: false}}
-                />
-              </Stack.Navigator>
-            </NavigationContainer>
- */

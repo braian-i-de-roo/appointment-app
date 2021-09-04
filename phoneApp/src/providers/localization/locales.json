@@ -1,0 +1,16 @@
+[
+  {
+    "language": "es",
+    "messages": {
+      "ingresar": "Ingresar",
+      "configuraciones": "Configuraciones"
+    }
+  },
+  {
+    "language": "en",
+    "messages": {
+      "ingresar": "Login",
+      "configuraciones": "Settings"
+    }
+  }
+]
