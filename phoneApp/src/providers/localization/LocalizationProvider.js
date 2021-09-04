@@ -28,7 +28,7 @@ const LocalizationProvider = props => {
   useEffect(() => {
     addSetting({
       Language: {
-        name: 'Language',
+        name: 'language',
         type: 'select',
         description: 'The language of the app',
         default: lang,

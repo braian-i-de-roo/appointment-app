@@ -2,10 +2,12 @@ import React, {useState} from 'react';
 
 import {Dimensions, Pressable, StyleSheet, View} from 'react-native';
 import {Card, Icon, Menu, MenuItem, Modal, Text} from '@ui-kitten/components';
+import {useLocalization} from '../../providers/localization/LocalizationContext';
 
 const screenWidth = Dimensions.get('screen').width;
 
 const SelectInput = props => {
+  const {trl} = useLocalization();
   const [selectedIndex, setSelectedIndex] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const displayValue = selectedIndex
@@ -17,6 +19,7 @@ const SelectInput = props => {
     setSelectedIndex(index);
     props.setter(props.possibleValues[index.row]);
   };
+  const trlPrefix = `settings.${props.name}.`;
   return (
     <Pressable
       style={({pressed}) => [
@@ -33,11 +36,13 @@ const SelectInput = props => {
       }}>
       <View style={styles.horizontalContainer}>
         <View style={styles.textContainer}>
-          <Text category="h6">{props.name}</Text>
-          <Text appearance="hint">{props.description}</Text>
+          <Text category="h6">{trl(trlPrefix + 'settingName')}</Text>
+          <Text appearance="hint">{trl(trlPrefix + 'description')}</Text>
         </View>
         <View style={styles.selectWrapper}>
-          <Text appearance="hint">{displayValue}</Text>
+          <Text appearance="hint">
+            {trl(trlPrefix + `options.${displayValue}`)}
+          </Text>
           <Icon name="code" style={styles.icon} fill="#8F9BB3" />
         </View>
       </View>
@@ -50,7 +55,10 @@ const SelectInput = props => {
         <Card disabled={true} style={{width: (80.0 * screenWidth) / 100}}>
           <Menu selectedIndex={selectedIndex} onSelect={onSelect}>
             {props.possibleValues.map(x => {
-              return <MenuItem key={x} title={x} />;
+              console.log(trlPrefix + `options.${x}`);
+              return (
+                <MenuItem key={x} title={trl(trlPrefix + `options.${x}`)} />
+              );
             })}
           </Menu>
         </Card>

@@ -51,11 +51,11 @@ const SettingsView = () => {
     <Layout style={styles.container}>
       <BaseHeader
         onBack={() => navigation.goBack()}
-        title={trl('configuraciones')}
+        title={trl('settings.settings')}
         hideSettings
       />
       <Input
-        placeholder="Search"
+        placeholder={trl('settings.search.search')}
         accessoryRight={<Icon name="search-outline" />}
         onChangeText={updateSettingsList}
       />

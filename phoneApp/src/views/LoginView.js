@@ -27,8 +27,7 @@ const LoginView = () => {
           status="primary"
         />
         <Divider />
-        <Text>{trl('ingresar')}</Text>
-        <Button onPress={() => login()}>{trl('ingresar')}</Button>
+        <Button onPress={() => login()}>{trl('login.login')}</Button>
       </Layout>
     </Layout>
   );

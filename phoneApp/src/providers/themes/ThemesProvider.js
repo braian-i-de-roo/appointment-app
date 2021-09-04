@@ -16,7 +16,7 @@ const ThemesProvider = props => {
   useEffect(() => {
     addSetting({
       Theme: {
-        name: 'Theme',
+        name: 'theme',
         type: 'select',
         description: 'Theme of the app',
         default: defaultPreferredTheme,

@@ -2,15 +2,61 @@
   {
     "language": "es",
     "messages": {
-      "ingresar": "Ingresar",
-      "configuraciones": "Configuraciones"
+      "settings": {
+        "settings": "Configuraciones",
+        "language": {
+          "settingName": "Idioma",
+          "description": "Idioma de la aplicación",
+          "options": {
+            "es": "Español",
+            "en": "Ingles"
+          }
+        },
+        "theme": {
+          "settingName": "Tema",
+          "description": "Tema de la aplicación",
+          "options": {
+            "light": "Claro",
+            "dark": "Oscuro"
+          }
+        },
+        "search": {
+          "search": "Buscar"
+        }
+      },
+      "login": {
+        "login": "Ingresar"
+      }
     }
   },
   {
     "language": "en",
     "messages": {
-      "ingresar": "Login",
-      "configuraciones": "Settings"
+      "settings": {
+        "settings": "Settings",
+        "language": {
+          "settingName": "Language",
+          "description": "Language of the app",
+          "options": {
+            "es": "Spanish",
+            "en": "English"
+          }
+        },
+        "theme": {
+          "settingName": "Theme",
+          "description": "Theme of the app",
+          "options": {
+            "light": "Light",
+            "dark": "Dark"
+          }
+        },
+        "search": {
+          "search": "Search"
+        }
+      },
+      "login": {
+        "login": "Login"
+      }
     }
   }
 ]
