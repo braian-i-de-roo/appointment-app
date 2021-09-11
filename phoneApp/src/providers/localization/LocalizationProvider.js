@@ -10,6 +10,7 @@ const Inner = props => {
   const translator = useTranslator();
   const value = {
     trl: id => translator.getMessageById(id),
+    trlp: prefix => id => value.trl(prefix + id),
     changeLanguage: props.setLanguage,
     currentLanguage: props.language,
   };
@@ -37,7 +38,7 @@ const LocalizationProvider = props => {
         value: language,
       },
     });
-  }, [language]);
+  }, []);
   return (
     <TranslationsProvider language={language} locales={localLocales}>
       <Inner language={language} setLanguage={setLanguage}>

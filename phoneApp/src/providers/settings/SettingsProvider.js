@@ -1,14 +1,26 @@
 import React, {useState} from 'react';
 import SettingsContext from './SettingsContext';
+import {useStorage} from '../storage/StorageContext';
 
 const SettingsProvider = props => {
   const [settings, setSettings] = useState({});
+  const {save, get} = useStorage();
 
-  const addSetting = setting => {
-    setSettings(prevSettings => ({
-      ...prevSettings,
-      ...setting,
-    }));
+  const addSetting = async setting => {
+    const inner = setting[Object.keys(setting)[0]];
+    const settingName = inner.name;
+    const oldValue = await get(settingName);
+    if (oldValue) {
+      inner.setter(oldValue);
+      let newSettings = settings;
+      newSettings[settingName] = inner;
+      setSettings(newSettings);
+    } else {
+      save(settingName, JSON.stringify(inner.value));
+      let newSettings = settings;
+      newSettings[settingName] = inner;
+      setSettings(newSettings);
+    }
   };
 
   const getSettingValue = settingName => {
@@ -35,11 +47,17 @@ const SettingsProvider = props => {
     return res;
   };
 
+  const setSetting = (setting, value) => {
+    save(setting, JSON.stringify(value));
+    settings[setting].setter(value);
+  };
+
   const value = {
     settings,
     addSetting,
     getSettingValue,
     filterSettings,
+    setSetting,
   };
 
   return (

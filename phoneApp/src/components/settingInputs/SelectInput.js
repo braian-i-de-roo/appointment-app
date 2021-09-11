@@ -3,11 +3,15 @@ import React, {useState} from 'react';
 import {Dimensions, Pressable, StyleSheet, View} from 'react-native';
 import {Card, Icon, Menu, MenuItem, Modal, Text} from '@ui-kitten/components';
 import {useLocalization} from '../../providers/localization/LocalizationContext';
+import {useSettings} from '../../providers/settings/SettingsContext';
 
 const screenWidth = Dimensions.get('screen').width;
 
 const SelectInput = props => {
-  const {trl} = useLocalization();
+  const trlPrefix = `settings.${props.name}.`;
+  const {trlp} = useLocalization();
+  const {setSetting} = useSettings();
+  const trl = trlp(trlPrefix);
   const [selectedIndex, setSelectedIndex] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const displayValue = selectedIndex
@@ -17,9 +21,8 @@ const SelectInput = props => {
   const onSelect = index => {
     setModalVisible(false);
     setSelectedIndex(index);
-    props.setter(props.possibleValues[index.row]);
+    setSetting(props.name, props.possibleValues[index.row]);
   };
-  const trlPrefix = `settings.${props.name}.`;
   return (
     <Pressable
       style={({pressed}) => [
@@ -36,13 +39,11 @@ const SelectInput = props => {
       }}>
       <View style={styles.horizontalContainer}>
         <View style={styles.textContainer}>
-          <Text category="h6">{trl(trlPrefix + 'settingName')}</Text>
-          <Text appearance="hint">{trl(trlPrefix + 'description')}</Text>
+          <Text category="h6">{trl('settingName')}</Text>
+          <Text appearance="hint">{trl('description')}</Text>
         </View>
         <View style={styles.selectWrapper}>
-          <Text appearance="hint">
-            {trl(trlPrefix + `options.${displayValue}`)}
-          </Text>
+          <Text appearance="hint">{trl(`options.${displayValue}`)}</Text>
           <Icon name="code" style={styles.icon} fill="#8F9BB3" />
         </View>
       </View>
@@ -56,9 +57,7 @@ const SelectInput = props => {
           <Menu selectedIndex={selectedIndex} onSelect={onSelect}>
             {props.possibleValues.map(x => {
               console.log(trlPrefix + `options.${x}`);
-              return (
-                <MenuItem key={x} title={trl(trlPrefix + `options.${x}`)} />
-              );
+              return <MenuItem key={x} title={trl(`options.${x}`)} />;
             })}
           </Menu>
         </Card>

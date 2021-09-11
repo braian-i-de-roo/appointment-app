@@ -14,20 +14,26 @@ import DoctorDataProvider from './providers/doctorData/DoctorDataProvider';
 import SettingsProvider from './providers/settings/SettingsProvider';
 import RoutesProvider from './providers/routes/RoutesProvider';
 import LocalizationProvider from './providers/localization/LocalizationProvider';
+import SecureStorageProvider from './providers/secureStorage/SecureStorageProvider';
+import StorageProvider from './providers/storage/StorageProvider';
 
 const App = () => {
   return (
-    <SettingsProvider>
-      <UserDataProvider>
-        <DoctorDataProvider>
-          <ThemesProvider>
-            <LocalizationProvider>
-              <RoutesProvider />
-            </LocalizationProvider>
-          </ThemesProvider>
-        </DoctorDataProvider>
-      </UserDataProvider>
-    </SettingsProvider>
+    <SecureStorageProvider>
+      <StorageProvider>
+        <SettingsProvider>
+          <UserDataProvider>
+            <DoctorDataProvider>
+              <ThemesProvider>
+                <LocalizationProvider>
+                  <RoutesProvider />
+                </LocalizationProvider>
+              </ThemesProvider>
+            </DoctorDataProvider>
+          </UserDataProvider>
+        </SettingsProvider>
+      </StorageProvider>
+    </SecureStorageProvider>
   );
 };
 export default App;

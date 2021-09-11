@@ -25,7 +25,7 @@ const ThemesProvider = props => {
         value: preferredTheme,
       },
     });
-  }, [preferredTheme]);
+  }, []);
 
   return (
     <ThemeContext.Provider value={{}}>
