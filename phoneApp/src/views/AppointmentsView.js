@@ -57,7 +57,7 @@ const AppointmentsView = ({route, navigation}) => {
         />
       ) : undefined}
       <ScrollView>
-        {appointments.length > 0 ? (
+        {appointments && appointments.length > 0 ? (
           renderAppointments()
         ) : (
           <View style={styles.aux}>

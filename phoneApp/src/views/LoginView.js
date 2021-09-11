@@ -6,14 +6,29 @@ import {StyleSheet} from 'react-native';
 import {useRoutes} from '../providers/routes/RoutesContext';
 import BaseHeader from '../components/navigation/BaseHeader';
 import {useLocalization} from '../providers/localization/LocalizationContext';
+import {useAuth} from '../providers/auth/AuthContext';
+import {useKeycloak} from '@react-keycloak/native';
 
 const LoginView = () => {
+  const {login} = useAuth();
+  const {keycloak} = useKeycloak();
   const {setUserName} = useUserData();
   const {setActiveFlow} = useRoutes();
   const {trl} = useLocalization();
 
-  const login = () => {
-    setActiveFlow('app');
+  const access = () => {
+    login()
+      .catch(x => {
+        console.log('auth error', x);
+      })
+      .then(() => {
+        if (keycloak.token) {
+          console.log("there's a token");
+          setActiveFlow('app');
+        } else {
+          console.log('error');
+        }
+      });
   };
 
   return (
@@ -27,7 +42,7 @@ const LoginView = () => {
           status="primary"
         />
         <Divider />
-        <Button onPress={() => login()}>{trl('login.login')}</Button>
+        <Button onPress={() => access()}>{trl('login.login')}</Button>
       </Layout>
     </Layout>
   );

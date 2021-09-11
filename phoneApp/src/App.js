@@ -16,21 +16,24 @@ import RoutesProvider from './providers/routes/RoutesProvider';
 import LocalizationProvider from './providers/localization/LocalizationProvider';
 import SecureStorageProvider from './providers/secureStorage/SecureStorageProvider';
 import StorageProvider from './providers/storage/StorageProvider';
+import AuthProvider from './providers/auth/AuthProvider';
 
 const App = () => {
   return (
     <SecureStorageProvider>
       <StorageProvider>
         <SettingsProvider>
-          <UserDataProvider>
-            <DoctorDataProvider>
-              <ThemesProvider>
-                <LocalizationProvider>
-                  <RoutesProvider />
-                </LocalizationProvider>
-              </ThemesProvider>
-            </DoctorDataProvider>
-          </UserDataProvider>
+          <AuthProvider>
+            <UserDataProvider>
+              <DoctorDataProvider>
+                <ThemesProvider>
+                  <LocalizationProvider>
+                    <RoutesProvider />
+                  </LocalizationProvider>
+                </ThemesProvider>
+              </DoctorDataProvider>
+            </UserDataProvider>
+          </AuthProvider>
         </SettingsProvider>
       </StorageProvider>
     </SecureStorageProvider>
