@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import LocalizationContext from './LocalizationContext';
 import {TranslationsProvider, useTranslator} from '@eo-locale/react-native';
 import {default as localLocales} from './locales.json';
-import {getLang} from './LocalizationService';
+import {getLang} from '../../services/LocalizationService';
 import {useSettings} from '../settings/SettingsContext';
 
 const Inner = props => {

@@ -1,4 +1,4 @@
-import {default as localLocales} from './locales.json';
+import {default as localLocales} from '../providers/localization/locales.json';
 import {NativeModules, Platform} from 'react-native';
 
 const defaultLang = 'es';
