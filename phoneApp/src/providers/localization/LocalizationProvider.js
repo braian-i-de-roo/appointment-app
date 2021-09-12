@@ -3,8 +3,10 @@ import React, {useEffect, useState} from 'react';
 import LocalizationContext from './LocalizationContext';
 import {TranslationsProvider, useTranslator} from '@eo-locale/react-native';
 import {default as localLocales} from './locales.json';
-import {getLang} from '../../services/LocalizationService';
+import LocalizationService from '../../services/LocalizationService';
 import {useSettings} from '../settings/SettingsContext';
+
+const localizationService = new LocalizationService();
 
 const Inner = props => {
   const translator = useTranslator();
@@ -23,7 +25,7 @@ const Inner = props => {
 };
 
 const LocalizationProvider = props => {
-  const lang = getLang(props);
+  const lang = localizationService.getLocale(props.lang);
   const [language, setLanguage] = useState(lang);
   const {addSetting} = useSettings();
   useEffect(() => {
