@@ -30,7 +30,7 @@ const LoginView = () => {
   };
 
   return (
-    <Layout>
+    <Layout testID="loginViewLayout">
       <BaseHeader />
       <Layout style={styles.layout}>
         <Button onPress={() => access()}>{trl('login.login')}</Button>

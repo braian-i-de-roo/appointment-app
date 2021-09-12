@@ -1,0 +1,65 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "test/e2e/config.json",
+  "skipLegacyWorkersInjection": true,
+  "apps": {
+    "ios": {
+      "type": "ios.app",
+      "binaryPath": "ios/build/Build/Debug-iphonesimulator/phoneapp.app",
+      "build": "xcodebuild -workspace /ios/phoneapp.xcworkspace -scheme phoneapp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build"
+    },
+    "android.debug": {
+      "type": "android.apk",
+      "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+      "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd .."
+    },
+    "android.release": {
+      "type": "android.apk",
+      "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+      "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd .."
+    }
+  },
+  "devices": {
+    "simulator": {
+      "type": "ios.simulator",
+      "device": {
+        "type": "iPhone 11"
+      }
+    },
+    "emulator": {
+      "type": "android.emulator",
+      "device": {
+        "avdName": "Nexus_S_API_29"
+      },
+      "utilBinaryPaths": ["./cache/test-butler-app.apk"]
+    },
+    "attachedAndroid": {
+      "type": "android.attached",
+      "device": {
+        "adbName": "GECQ49IVGYUCB6V4"
+      }
+    }
+  },
+  "configurations": {
+    "ios": {
+      "device": "simulator",
+      "app": "ios"
+    },
+    "android.emu.debug": {
+      "device": "emulator",
+      "app": "android.debug"
+    },
+    "android.emu.release": {
+      "device": "emulator",
+      "app": "android.release"
+    },
+    "android.att.debug": {
+      "device": "attachedAndroid",
+      "app": "android.debug"
+    },
+    "android.att.release": {
+      "device": "attachedAndroid",
+      "app": "android.release"
+    }
+  }
+}
