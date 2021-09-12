@@ -1,7 +1,6 @@
 import React from 'react';
 
-import {useUserData} from '../providers/userDataProvider/UserDataContext';
-import {Button, Divider, Input, Layout, Text} from '@ui-kitten/components';
+import {Button, Layout} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
 import {useRoutes} from '../providers/routes/RoutesContext';
 import BaseHeader from '../components/navigation/BaseHeader';
@@ -12,7 +11,6 @@ import {useKeycloak} from '@react-keycloak/native';
 const LoginView = () => {
   const {login} = useAuth();
   const {keycloak} = useKeycloak();
-  const {setUserName} = useUserData();
   const {setActiveFlow} = useRoutes();
   const {trl} = useLocalization();
 
@@ -35,13 +33,6 @@ const LoginView = () => {
     <Layout>
       <BaseHeader />
       <Layout style={styles.layout}>
-        <Text category="h5">Login</Text>
-        <Input
-          placeholder="username"
-          onChangeText={setUserName}
-          status="primary"
-        />
-        <Divider />
         <Button onPress={() => access()}>{trl('login.login')}</Button>
       </Layout>
     </Layout>
