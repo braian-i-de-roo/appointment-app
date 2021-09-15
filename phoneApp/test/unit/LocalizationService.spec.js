@@ -7,21 +7,15 @@ const allMatchLocale = (localizationService, langs, matchedLang) => {
     if (typeof matchedLang === 'string') {
       expect(res).toEqual(matchedLang);
     } else {
-      expect(res).toEqual(matchedLang(index));
+      expect(res).toEqual(matchedLang(index, lang, res));
     }
   }
 };
 
-const vagueLangs = ['es', 'en'];
-const specificLangs = ['es_US', 'en_US'];
+const vagueLangs = ['en', 'es', 'pt'];
+const specificLangs = ['en_GB', 'en_US', 'es_AR', 'es_US', 'pt_BR', 'pt_PT'];
 const completeLangs = [...vagueLangs, ...specificLangs];
 const vagueLocales = [
-  {
-    language: 'es',
-    messages: {
-      hello: 'hola',
-    },
-  },
   {
     language: 'en',
     messages: {
@@ -29,13 +23,37 @@ const vagueLocales = [
     },
   },
   {
-    language: 'it',
+    language: 'es',
     messages: {
-      hello: 'ciao',
+      hello: 'hola',
+    },
+  },
+  {
+    language: 'pt',
+    messages: {
+      hello: 'Olá',
     },
   },
 ];
 const specificLocales = [
+  {
+    language: 'en_GB',
+    messages: {
+      hello: 'hello',
+    },
+  },
+  {
+    language: 'en_US',
+    messages: {
+      hello: 'hello',
+    },
+  },
+  {
+    language: 'es_AR',
+    messages: {
+      hello: 'hola',
+    },
+  },
   {
     language: 'es_US',
     messages: {
@@ -43,9 +61,15 @@ const specificLocales = [
     },
   },
   {
-    language: 'en_US',
+    language: 'pt_BR',
     messages: {
-      hello: 'hello',
+      hello: 'Olá',
+    },
+  },
+  {
+    language: 'pt_PT',
+    messages: {
+      hello: 'Olá',
     },
   },
 ];
@@ -61,19 +85,23 @@ describe('LocalizationService', () => {
   it('returns a less specific locale if it is equal to the prefix of the requested language', () => {
     const langs = specificLangs;
     const localizationService = new LocalizationService(vagueLocales);
-    allMatchLocale(localizationService, langs, index => vagueLangs[index]);
+    allMatchLocale(localizationService, langs, (index, lang) =>
+      lang.substring(0, lang.indexOf('_')),
+    );
   });
 
-  it('returns a more specific locale if it contains the requested language as prefix', () => {
+  it('returns the first more specific locale if it contains the requested language as prefix', () => {
     const langs = vagueLangs;
     const localizationService = new LocalizationService(specificLocales);
-    allMatchLocale(localizationService, langs, index => specificLangs[index]);
+    allMatchLocale(localizationService, langs, (index, lang) =>
+      specificLangs.find(x => x.indexOf(lang) === 0),
+    );
   });
 
   it("returns the locale that matches the system's language if the requested language has no matching locales", () => {
     const langs = ['es', 'es_US'];
-    const userLang = 'en';
-    const locales = completeLocales.filter(x => x.language === 'en');
+    const userLang = 'pt_BR';
+    const locales = completeLocales.filter(x => x.language.indexOf('es') !== 0);
     const localizationService = new LocalizationService(locales);
     // can we even test Platform.OS on PCs?
     LocalizationService.userLanguage = jest.fn().mockReturnValue(userLang);
@@ -87,8 +115,9 @@ describe('LocalizationService', () => {
       completeLocales,
       defaultLocale,
     );
+    LocalizationService.userLanguage = jest.fn().mockReturnValue('es');
     const res = localizationService.getLocale(lang);
-    expect(res).toEqual(defaultLocale);
+    expect(res).toEqual('es');
   });
 
   it('returns the default locale if there are no matching locales and the system language is not available', () => {
